@@ -1,0 +1,1 @@
+angular.module("itemCrud",["ngRoute","MainController","appRoute","ProductService"])

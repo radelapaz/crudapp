@@ -1,4 +1,3 @@
-var http = require('http');
 var express = require('express');
 var cors = require('cors');
 var app = express();
@@ -7,7 +6,6 @@ var compression = require("compression");
 var session  = require('express-session');
 var methodOverride = require('method-override');
 var api = require('./app/api');
-var appli = require('./app/Query');
 var cookieParser = require('cookie-parser');
 var flash = require('req-flash');
 var port = 8888;
@@ -36,5 +34,4 @@ api(app);
 app.listen(port, '0.0.0.0', function(){
     console.log("Server running at port: "+  port);
 });
-
 exports = module.exports = app;
