@@ -13,7 +13,7 @@ var Queries= {
         return db.query("DELETE FROM items WHERE id=?",[id],callback);
     },
     updateItem:function(id,item,callback){
-        return db.query("UPDATE items SET name=?,quantity=?,amount=? WHERE id=?",[item.name,item.quantity,item.amount,item.id],callback);
+        return db.query("UPDATE items SET name=?,quantity=?,amount=? WHERE id=?",[item.name,item.quantity,item.amount,id],callback);
     }
 };
 module.exports = Queries;

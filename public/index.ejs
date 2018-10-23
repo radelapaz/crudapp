@@ -1,0 +1,46 @@
+<% include header.ejs %>
+<div id="main">
+   <div class="container">
+        <h2>Items</h2>
+        <% if (itemList.length > 0) {%>
+        <div class="row">
+            <div class="col-12">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Item Name</th>
+                            <th>Item Quantity</th>
+                            <th>Item Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% itemList.forEach((item, index) => {  %>
+                        <tr>
+                            <td><%= item.id%></td>
+                            <td><%= item.name%></td>
+                            <td><%= item.quantity%> </td>
+                            <td>₱ <%= item.amount%> </td>
+                            <td>
+                                <a href="/edit-page/<%= item.id %>" class="btn btn-warning"">Update</a>
+                            </td>
+                            <td>
+                                <form method="POST" action="/item/<%= item.id%>">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                                <!-- <a href="/item/<%= item.id %>" class="btn btn-danger">Delete</a> -->
+                            </td>
+                        </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <%} else {%>
+            <p class="text-center">No Items Found. Go <a href="/add-page" >here</a> to add items.</p>
+        <% } %>
+    </div>
+</div>
+</body>
+</html>

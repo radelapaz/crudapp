@@ -33,20 +33,21 @@ angular.module("MainController",[]).controller("MainController", function($scope
     };
 
     $scope.deleteProduct = function(itemId){
-        ItemService.deleteItem(itemId)
-            .then(function(response){
-                if(response.data.status) {
-                    for (var i = 0; i <= $scope.itemList.length -1 ; i++) {
-                        if (itemId === $scope.itemList[i].id) {
-                            $scope.itemList.splice(i, 1);
-                            break;
-                        }
+        // ItemService.deleteItem(itemId)
+        //     .then(function(response){
+        //         if(response.data.status) {
+        //             for (var i = 0; i <= $scope.itemList.length -1 ; i++) {
+        //                 if (itemId === $scope.itemList[i].id) {
+        //                     $scope.itemList.splice(i, 1);
+        //                     break;
+        //                 }
 
-                    }
-                } else {
-                    console.log("error");
-                }
-            });
+        //             }
+        //         } else {
+        //             console.log("error");
+        //         }
+        //     });
+        console.log()
     }
 
     $scope.updateProduct = function(itemId){

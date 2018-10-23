@@ -1,0 +1,32 @@
+<% include header.ejs %>
+<div class="container">
+    <% if (message != '') { %>
+        <p class="text-center text-danger"><%= message %></p>
+    <% } %>
+    <div class="row">
+        <h2>Add Item</h2>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form action="/add-page" method="POST" >
+                <div class="form-group">
+                    <label for="name">Item Name</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter Product Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Item Quantity</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" min=0 oninput="validity.valid||(value='');" placeholder="Enter Quantity" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Item Amount</label>
+                    <input type="number" class="form-control" id="amount" name="amount"  min=0 oninput="validity.valid||(value='');"  placeholder="Enter Amount" required>
+                </div>
+                <div class="row" >
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

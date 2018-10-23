@@ -21,12 +21,13 @@ angular.module("ItemService",[]).factory('ItemService',['$http',function($http) 
         },
 
         deleteItem: function(itemId){
-            return $http.delete("/item-delete/"+itemId)
-                .then(function successCallback(response){
-                    return response;
-                }, function errorCallback(response){
-                    return response;
-                });
+            console.log(itemId);
+            // return $http.delete("/item-delete/"+itemId)
+            //     .then(function successCallback(response){
+            //         return response;
+            //     }, function errorCallback(response){
+            //         return response;
+            //     });
         },
 
         updateItem: function(itemData){
