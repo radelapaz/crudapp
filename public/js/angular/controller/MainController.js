@@ -1,15 +1,13 @@
-angular.module("MainController",[]).controller("MainController", function($scope,ProductService,$timeout){
+angular.module("MainController",[]).controller("MainController", function($scope,ItemService,$timeout){
     
     $scope.load = function(){
-        ProductService.loadItems()
+        ItemService.loadItems()
             .then(function(response){
                 if(response.status === 200){
-                    $scope.productList = response.data.result;
-                    $scope.productLength = response.data.result.length;
+                    $scope.itemList = response.data.result;
+                    $scope.itemLength = response.data.result.length;
                 }
             });
-
-        // console.log(response.data);
     };
 
     $scope.addProduct = function(){
@@ -21,9 +19,9 @@ angular.module("MainController",[]).controller("MainController", function($scope
         }
        
 
-        ProductService.addItem(itemData).then(function(response){
+        ItemService.addItem(itemData).then(function(response){
             if(response.data.status){
-                $scope.productList.unshift(response.data.result);
+                $scope.itemList.unshift(response.config.data);
             } else {
                 
             }
@@ -35,51 +33,49 @@ angular.module("MainController",[]).controller("MainController", function($scope
     };
 
     $scope.deleteProduct = function(itemId){
-        // ProductService.deleteItem(productId)
-        //     .then(function(response){
-        //         if(response.data.status) {
-        //             for (var i = 0; i <= $scope.productList.length -1 ; i++) {
-        //                 if (productId === $scope.productList[i]._id) {
-        //                     $scope.productList.splice(i, 1);
-        //                     break;
-        //                 }
+        ItemService.deleteItem(itemId)
+            .then(function(response){
+                if(response.data.status) {
+                    for (var i = 0; i <= $scope.itemList.length -1 ; i++) {
+                        if (itemId === $scope.itemList[i].id) {
+                            $scope.itemList.splice(i, 1);
+                            break;
+                        }
 
-        //             }
-        //         } else {
-        //             console.log("error");
-        //         }
-        //     });
-        console.log(itemId);
+                    }
+                } else {
+                    console.log("error");
+                }
+            });
     }
 
-    $scope.updateProduct = function(productId){
+    $scope.updateProduct = function(itemId){
         var foundProduct =null;
-        for(var i = 0; i<= $scope.productLength -1; i++){
-            if($scope.productList[i]._id == productId){
-                foundProduct = $scope.productList[i];
+        for(var i = 0; i<= $scope.itemLength -1; i++){
+            if($scope.itemList[i].id == itemId){
+                foundProduct = $scope.itemList[i];
                 break;
             }
         }
 
         if(foundProduct){
             var updatedProduct = {
-                productId: foundProduct.productId,
-                productName: foundProduct.productName,
-                productPrice: foundProduct.productPrice,
-                _id: productId
+                id: foundProduct.id,
+                name: foundProduct.name,
+                quantity: foundProduct.quantity,
+                amount: foundProduct.amount
             }
 
            $scope.editProd ={
-                id: updatedProduct.productId,
-                name: updatedProduct.productName,
-                price: updatedProduct.productPrice,
-                _id: updatedProduct._id
+                id: updatedProduct.id,
+                name: updatedProduct.name,
+                quantity: updatedProduct.quantity,
+                amount: updatedProduct.amount
 
            }
     
         }
 
-    
 
         $scope.editFill = true;
       
@@ -97,12 +93,12 @@ angular.module("MainController",[]).controller("MainController", function($scope
         
         $scope.editFill = false;
 
-        ProductService.updateItem(product).then(function(response){
+        ItemService.updateItem(product).then(function(response){
             if(response.data.status){
-                for(var i = 0; i <= $scope.productList.length -1; i++){
-                    if($scope.productList[i]._id == $scope.editProd._id){
+                for(var i = 0; i <= $scope.itemList.length -1; i++){
+                    if($scope.itemList[i].id == $scope.editProd.id){
                         $timeout(function() {
-                            $scope.productList.splice(i, 1,response.data.result);
+                            $scope.itemList.splice(i, 1,response.data.result);
                         });
             
                         break;
@@ -111,7 +107,6 @@ angular.module("MainController",[]).controller("MainController", function($scope
                
                 cleanUp($scope.editProd);
             } else {
-                console.log(response);
             }
         });
     }

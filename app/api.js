@@ -2,6 +2,8 @@ var Queries = require("./Query");
 module.exports = function(app){
     /** ADD ITEM*/
     app.post("/items/new",function(req,res){
+        // console.log(req.body.name);
+        // console.log(req.body);
         Queries.addItem(req.body,function(err,result){
             if(err){
                 res.json({status:false, message: err});

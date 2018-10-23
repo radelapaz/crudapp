@@ -9,11 +9,12 @@
         <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
          <!-- <script src="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.tpls.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/angular-toastr@2/dist/angular-toastr.css"> -->
+        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
          <script type="text/javascript"  src="js/jquery.min.js"></script>
          <script type="text/javascript"  src="js/angular.min.js"></script>
          <script type="text/javascript"  src="js/angular-route.min.js"></script>
          <script type="text/javascript"  src="js/angular/controller/MainController.js"></script>
-         <script type="text/javascript"  src="js/angular/service/ProductService.js"></script>
+         <script type="text/javascript"  src="js/angular/service/ItemService.js"></script>
          <script type="text/javascript"  src="js/angular/appRoute.js"></script>
          <script type="text/javascript"  src="js/angular/app.js"></script>
     </head>
@@ -46,16 +47,16 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="product in productList">
-                                    <td>{{product.id}}</td>
-                                    <td>{{product.name}}</td>
-                                    <td>{{product.quantity}}</td>
-                                    <td>₱ {{product.amount}}</td>
+                                <tr ng-repeat="item in itemList">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.quantity}}</td>
+                                    <td>₱ {{item.amount}}</td>
                                     <td>
                                         <button type="button" class="btn btn-danger"
-                                        ng-click="deleteProduct(product.id)">Delete</button>
+                                        ng-click="deleteProduct(item.id)">Delete</button>
                                     </td>
-                                    <td><button type="button" class="btn btn-warning" ng-click="updateProduct(product.id)">Update</button></td>
+                                    <td><button type="button" class="btn btn-warning" ng-click="updateProduct(item.id)">Update</button></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -74,23 +75,34 @@
                         <form>
                             <div class="form-group">
                                 <label for="productName">Item Name</label>
-                                <input type="text" class="form-control" id="productName" ng-model="addProd.name" placeholder="Enter Product Name">
+                                <input type="text" class="form-control" id="productName" ng-model="addProd.name" placeholder="Enter Product Name" required>
                             </div>
                             <div class="form-group">
                                 <label for="productPrice">Item Quantity</label>
-                                <input type="number" class="form-control" id="productQuantity" ng-model="addProd.quantity" placeholder="Enter Quantity">
+                                <input type="number" class="form-control" id="productQuantity" min=0 oninput="validity.valid||(value='');" ng-model="addProd.quantity" placeholder="Enter Quantity" required>
                             </div>
                             <div class="form-group">
                                 <label for="productPrice">Item Amount</label>
-                                <input type="number" class="form-control" id="productAmount" ng-model="addProd.amount" placeholder="Enter Amount">
+                                <input type="number" class="form-control" id="productAmount"  min=0 oninput="validity.valid||(value='');"  ng-model="addProd.amount" placeholder="Enter Amount" required>
                             </div>
                             <div class="row" ng-show="!submitted">
                                 <button ng-click="addProduct()" class="btn btn-primary">Submit</button>
                             </div>
                             <div class="row" ng-show="submitted">
-                                <div id="loading">
-                                    <ul class="bokeh">
-                                    </ul>
+                                <div class="container">
+	                                <div class="row">
+		                                <div id="loader">
+    		                                <div class="dot"></div>
+                                			<div class="dot"></div>
+                                			<div class="dot"></div>
+                                			<div class="dot"></div>
+                                			<div class="dot"></div>
+                                			<div class="dot"></div>
+                                			<div class="dot"></div>
+                                			<div class="dot"></div>
+                                			<div class="lading"></div>
+		                                </div>
+	                                </div>
                                 </div>
                             </div>
                         </form>
@@ -109,11 +121,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="productPrice">Item Quantity</label>
-                                    <input type="number" class="form-control" id="productPrice" ng-model="editProd.quantity" placeholder="Enter Quantity">
+                                    <input type="number" class="form-control" id="productPrice"  min=0 oninput="validity.valid||(value='');"  ng-model="editProd.quantity" placeholder="Enter Quantity">
                                 </div>
                                 <div class="form-group">
-                                    <label for="productPrice">Product Amount</label>
-                                    <input type="number" class="form-control" id="productPrice" ng-model="editProd.amount" placeholder="Enter Amount">
+                                    <label for="productPrice">Item Amount</label>
+                                    <input type="number" class="form-control" id="productPrice"  min=0 oninput="validity.valid||(value='');"  ng-model="editProd.amount" placeholder="Enter Amount">
                                 </div>
                                 <div class="row">
                                     <div class="col-6">

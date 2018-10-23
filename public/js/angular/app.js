@@ -1,1 +1,1 @@
-angular.module("itemCrud",["ngRoute","MainController","appRoute","ProductService"])
+angular.module("itemCrud",["ngRoute","MainController","appRoute","ItemService"])

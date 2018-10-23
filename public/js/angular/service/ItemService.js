@@ -1,4 +1,4 @@
-angular.module("ProductService",[]).factory('ProductService',['$http',function($http) {
+angular.module("ItemService",[]).factory('ItemService',['$http',function($http) {
     return {
 
         loadItems: function(){
@@ -10,8 +10,8 @@ angular.module("ProductService",[]).factory('ProductService',['$http',function($
                 });
         },
 
-        addItem: function(productData){
-            return $http.post("/items/new", productData)
+        addItem: function(itemData){
+            return $http.post("/items/new", itemData)
                 .then(function successCallback(response){
                     return response;
                 }, function errorCallback(response){
@@ -20,8 +20,8 @@ angular.module("ProductService",[]).factory('ProductService',['$http',function($
        
         },
 
-        deleteItem: function(productId){
-            return $http.delete("/item-delete/"+productId)
+        deleteItem: function(itemId){
+            return $http.delete("/item-delete/"+itemId)
                 .then(function successCallback(response){
                     return response;
                 }, function errorCallback(response){
@@ -29,8 +29,8 @@ angular.module("ProductService",[]).factory('ProductService',['$http',function($
                 });
         },
 
-        updateItem: function(product){
-            return $http.put("/item/update", product)
+        updateItem: function(itemData){
+            return $http.put("/item/update", itemData)
                 .then(function successCallback(response){
                     return response;
                 }, function errorCallback(response){
