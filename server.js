@@ -24,14 +24,14 @@ app.use(function(req, res, next) {
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(methodOverride('X-HTTP-Method-Override'));
+app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname, 'public'))); // configure express to use public folder
 
 app.use(session({ secret: 'crud' }));
 app.use(flash());
 app.use(cors());
 
-api(app);
+api(app); //passing the app instance;
 
 app.listen(port, '0.0.0.0', function(){
     console.log("Server running at port: "+  port);

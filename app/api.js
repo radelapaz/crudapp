@@ -9,6 +9,7 @@ module.exports = function(app){
         });
     });
 
+    /** EDIT ITEM PAGE */
     app.get('/edit-page/:id',function(req,res){
         Queries.getById(req.params.id, function(err,result){
             if(err){
@@ -46,9 +47,9 @@ module.exports = function(app){
             }
         });
     });
-    
+
      /** DELETE ITEM*/
-    app.get("/item/:id", function(req,res){
+    app.delete("/item/:id", function(req,res){
         Queries.deleteItem(req.params.id,function(err,result){
             if(err){
                 return res.status(500).send(err);
@@ -59,8 +60,8 @@ module.exports = function(app){
      
     });
 
-    app.post("/items-update/:id",function(req,res){
-        Queries.updateItem(req.params.id,req.body,function(err,result){
+    app.put("/edit-page/:id",function(req,res){
+        Queries.updateItem(req.params.id,req.body,function(err){
             if(err){
                 res.json(err);
             }else {
