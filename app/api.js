@@ -60,6 +60,7 @@ module.exports = function(app){
      
     });
 
+    /* UPDATE ITEM*/
     app.put("/edit-page/:id",function(req,res){
         Queries.updateItem(req.params.id,req.body,function(err){
             if(err){
