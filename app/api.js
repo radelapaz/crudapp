@@ -1,7 +1,6 @@
 var Queries = require("./Query");
 module.exports = function(app){
 
-    
     /** ADD ITEM PAGE*/
     app.get('/add-page', function(req,res){
         res.render('add-page.ejs',{
@@ -25,7 +24,6 @@ module.exports = function(app){
     });
 
     app.post("/add-page",function(req,res){
-        // console.log(req.body.name);
         Queries.addItem(req.body,function(err,result){
             if(err){
                 return res.status(500).send(err);
@@ -48,16 +46,16 @@ module.exports = function(app){
             }
         });
     });
+    
      /** DELETE ITEM*/
-    app.delete("/item/:id", function(req,res){
-        console.log(req.params.id);
-        // Queries.deleteItem(req.params.id,function(err,result){
-        //     if(err){
-        //         return res.status(500).send(err);
-        //     } else {
-        //         res.redirect('/');
-        //     }
-        // });
+    app.get("/item/:id", function(req,res){
+        Queries.deleteItem(req.params.id,function(err,result){
+            if(err){
+                return res.status(500).send(err);
+            } else {
+                res.redirect('/');
+            }
+        });
      
     });
 
@@ -70,17 +68,4 @@ module.exports = function(app){
             }
         });
     });
-     /** GET ITEM*/
-    // app.get("/items/id",function(req,res){
-    //     // Queries.getById(req.params.id,function(err,result){
-    //     //     if(err){
-    //     //         res.json(err);
-    //     //     } else{
-    //     //         res.json(result);
-    //     //     }
-    //     // });
-    
-    //     console.log(req);
-    // });
-    
 };

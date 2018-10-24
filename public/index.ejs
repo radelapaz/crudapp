@@ -25,11 +25,8 @@
                                 <a href="/edit-page/<%= item.id %>" class="btn btn-warning"">Update</a>
                             </td>
                             <td>
-                                <form method="POST" action="/item/<%= item.id%>">
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                                </form>
-                                <!-- <a href="/item/<%= item.id %>" class="btn btn-danger">Delete</a> -->
+                                <!-- <button type="submit" class="btn btn-danger">Delete</button> -->
+                                <a href="/item/<%= item.id %>" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                         <% }) %>
